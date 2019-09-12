@@ -1,10 +1,11 @@
-﻿/*
+﻿﻿/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package br.senac.sp.aula4;
 
+import br.senac.sp.aula4.Carro;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
@@ -56,6 +57,8 @@ public class AceleradorView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Piloto Automático");
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Defina um valor para o piloto automático"));
+
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/seta-cima.png"))); // NOI18N
         jButton1.setText("Acelerar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +69,11 @@ public class AceleradorView extends javax.swing.JFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/seta-baixo.png"))); // NOI18N
         jButton2.setText("Frear");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         acelerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +105,7 @@ public class AceleradorView extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,13 +122,13 @@ public class AceleradorView extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(19, 19, 19)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
@@ -169,21 +177,21 @@ public class AceleradorView extends javax.swing.JFrame {
     }                                        
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        
        
-        
-        if(acelerar.getText().trim().equals(" ")){
-            int vel = Integer.parseInt(0);
-      
-            vel +=10;
-             meuCarro.acelelar(vel);
-             
-        } else {
-            meuCarro.acelelar(SOMEBITS);
+        Integer v,a;
+        String str;
+        if(acelerar.getText().trim().equals(""))
+            meuCarro.acelelar();
+       else {
+           str = acelerar.getText();
+           v = Integer.parseInt(str);
+           meuCarro.acelelar(v);
+          
         }
+         a = meuCarro.getVelocidadeAtual();
+         jLabel2.setText(a.toString());
             
-        
-
+      
 
     }                                        
 
@@ -191,6 +199,21 @@ public class AceleradorView extends javax.swing.JFrame {
 
 
     }                                                    
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        Integer v,a;
+        String str;
+        if(acelerar.getText().trim().equals(""))
+            meuCarro.frear();
+       else {
+           str = acelerar.getText();
+           v = Integer.parseInt(str);
+           meuCarro.acelelar(v);
+          
+        }
+         a = meuCarro.getVelocidadeAtual();
+         jLabel2.setText(a.toString());
+    }                                        
 
     /**
      * @param args the command line arguments
